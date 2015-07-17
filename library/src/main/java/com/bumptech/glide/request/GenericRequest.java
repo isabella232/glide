@@ -12,6 +12,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.Engine;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.model.ModelLoader;
+import com.bumptech.glide.load.resource.UnitTransformation;
 import com.bumptech.glide.load.resource.transcode.ResourceTranscoder;
 import com.bumptech.glide.provider.LoadProvider;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -220,6 +221,9 @@ public final class GenericRequest<A, T, Z, R> implements Request, SizeReadyCallb
         if (model != null) {
             check("ModelLoader", loadProvider.getModelLoader(), "try .using(ModelLoader)");
             check("Transcoder", loadProvider.getTranscoder(), "try .as*(Class).transcode(ResourceTranscoder)");
+            if (transformation == null) {
+                transformation = UnitTransformation.get();
+            }
             check("Transformation", transformation, "try .transform(UnitTransformation.get())");
             if (diskCacheStrategy.cacheSource()) {
                 check("SourceEncoder", loadProvider.getSourceEncoder(),
