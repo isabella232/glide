@@ -305,22 +305,6 @@ public class GenericRequestTest {
     }
 
     @Test
-    public void testThrowsWhenTransformationIsNull() {
-        for (DiskCacheStrategy strategy : DiskCacheStrategy.values()) {
-            harness = new RequestHarness();
-            harness.diskCacheStrategy = strategy;
-            harness.transformation = null;
-
-            try {
-                harness.getRequest();
-                fail(NullPointerException.class.getSimpleName() + " expected for " + strategy);
-            } catch (NullPointerException ex) {
-                // expected
-            }
-        }
-    }
-
-    @Test
     public void testIsNotCompleteBeforeReceivingResource() {
         GenericRequest request = harness.getRequest();
 
