@@ -42,7 +42,7 @@ public class AppWidgetTargetTest {
         AppWidgetTarget target = new AppWidgetTarget(Robolectric.application, views, viewId, componentName);
 
         Bitmap bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
-        target.onResourceReady(bitmap, null /*glideAnimation*/);
+        target.onResourceReady(bitmap, null, /*glideAnimation*/false);
 
         verify(views).setImageViewBitmap(eq(viewId), eq(bitmap));
     }
@@ -52,7 +52,7 @@ public class AppWidgetTargetTest {
         ComponentName componentName = mock(ComponentName.class);
         AppWidgetTarget target = new AppWidgetTarget(Robolectric.application, views, viewId, componentName);
 
-        target.onResourceReady(Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888), null /*glideAnimation*/);
+        target.onResourceReady(Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888), null, /*glideAnimation*/false);
 
         assertEquals(componentName, shadowManager.updatedComponentName);
         assertEquals(views, shadowManager.updatedRemoteViews);
@@ -64,7 +64,7 @@ public class AppWidgetTargetTest {
         AppWidgetTarget target = new AppWidgetTarget(Robolectric.application, views, viewId, widgetIds);
 
         Bitmap bitmap = Bitmap.createBitmap(100, 200, Bitmap.Config.RGB_565);
-        target.onResourceReady(bitmap, null /*glideAnimation*/);
+        target.onResourceReady(bitmap, null, /*glideAnimation*/false);
 
         verify(views).setImageViewBitmap(eq(viewId), eq(bitmap));
     }
@@ -74,7 +74,7 @@ public class AppWidgetTargetTest {
         int[] widgetIds = new int[] { 1 };
         AppWidgetTarget target = new AppWidgetTarget(Robolectric.application, views, viewId, widgetIds);
 
-        target.onResourceReady(Bitmap.createBitmap(200, 100, Bitmap.Config.ARGB_8888), null /*glideAnimation*/);
+        target.onResourceReady(Bitmap.createBitmap(200, 100, Bitmap.Config.ARGB_8888), null, /*glideAnimation*/false);
 
         assertThat(widgetIds).isEqualTo(shadowManager.updatedWidgetIds);
         assertEquals(views, shadowManager.updatedRemoteViews);

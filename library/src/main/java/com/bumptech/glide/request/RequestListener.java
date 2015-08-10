@@ -44,7 +44,7 @@ public interface RequestListener<T, R> {
 
     /**
      * Called when a load completes successfully, immediately after
-     * {@link Target#onResourceReady(Object, com.bumptech.glide.request.animation.GlideAnimation)}.
+     * {@link Target#onResourceReady(Object, com.bumptech.glide.request.animation.GlideAnimation, boolean)}.
      *
      * @param resource The resource that was loaded for the target.
      * @param model The specific model that was used to load the image.

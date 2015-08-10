@@ -526,7 +526,7 @@ public final class GenericRequest<A, T, Z, R> implements Request, SizeReadyCallb
         if (requestListener == null || !requestListener.onResourceReady(result, model, target, loadedFromMemoryCache,
                 isFirstResource)) {
             GlideAnimation<R> animation = animationFactory.build(loadedFromMemoryCache, isFirstResource);
-            target.onResourceReady(result, animation);
+            target.onResourceReady(result, animation, loadedFromMemoryCache);
         }
 
         notifyLoadSuccess();

@@ -691,7 +691,7 @@ public class GenericRequestTest {
         GenericRequest request = harness.getRequest();
         request.onResourceReady(harness.resource);
 
-        verify(harness.target).onResourceReady(eq(harness.result), any(GlideAnimation.class));
+        verify(harness.target).onResourceReady(eq(harness.result), any(GlideAnimation.class), anyBoolean());
     }
 
     @Test
@@ -701,7 +701,7 @@ public class GenericRequestTest {
                 anyBoolean(), anyBoolean())).thenReturn(false);
         request.onResourceReady(harness.resource);
 
-        verify(harness.target).onResourceReady(eq(harness.result), any(GlideAnimation.class));
+        verify(harness.target).onResourceReady(eq(harness.result), any(GlideAnimation.class), anyBoolean());
     }
 
     @Test
@@ -711,7 +711,7 @@ public class GenericRequestTest {
                 anyBoolean(), anyBoolean())).thenReturn(true);
         request.onResourceReady(harness.resource);
 
-        verify(harness.target, never()).onResourceReady(any(List.class), any(GlideAnimation.class));
+        verify(harness.target, never()).onResourceReady(any(List.class), any(GlideAnimation.class), anyBoolean());
     }
 
     @Test
@@ -842,7 +842,7 @@ public class GenericRequestTest {
         when(harness.factory.build(anyBoolean(), anyBoolean())).thenReturn(glideAnimation);
         request.onResourceReady(harness.resource);
 
-        verify(harness.target).onResourceReady(eq(harness.result), eq(glideAnimation));
+        verify(harness.target).onResourceReady(eq(harness.result), eq(glideAnimation), anyBoolean());
     }
 
     @Test
@@ -913,7 +913,8 @@ public class GenericRequestTest {
         request.cancel();
         request.begin();
 
-        verify(harness.target, times(2)).onResourceReady(eq(harness.result), any(GlideAnimation.class));
+        verify(harness.target, times(2)).onResourceReady(
+                eq(harness.result), any(GlideAnimation.class), anyBoolean());
     }
 
     @Test
@@ -1027,7 +1028,7 @@ public class GenericRequestTest {
         }
 
         @Override
-        public void onResourceReady(Object resource, GlideAnimation glideAnimation) {
+        public void onResourceReady(Object resource, GlideAnimation glideAnimation, boolean fromMemoryCache) {
             currentPlaceholder = null;
         }
 

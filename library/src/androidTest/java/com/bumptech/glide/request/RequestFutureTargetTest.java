@@ -64,7 +64,7 @@ public class RequestFutureTargetTest {
 
     @Test
     public void testReturnsTrueFromIsDoneIfDone() {
-        future.onResourceReady(new Object(), null);
+        future.onResourceReady(new Object(), null, false);
         assertTrue(future.isDone());
     }
 
@@ -109,7 +109,7 @@ public class RequestFutureTargetTest {
 
     @Test
     public void testDoesNotClearRequestIfCancelledAfterDone() {
-        future.onResourceReady(new Object(), null);
+        future.onResourceReady(new Object(), null, false);
         future.cancel(true);
 
         verify(request, never()).clear();
@@ -123,7 +123,7 @@ public class RequestFutureTargetTest {
 
     @Test
     public void testReturnsFalseFromIsCancelledIfCancelledAfterDone() {
-        future.onResourceReady(new Object(), null);
+        future.onResourceReady(new Object(), null, false);
         future.cancel(true);
 
         assertFalse(future.isCancelled());
@@ -137,14 +137,14 @@ public class RequestFutureTargetTest {
 
     @Test
     public void testReturnsFalseFromCancelIfDone() {
-        future.onResourceReady(new Object(), null);
+        future.onResourceReady(new Object(), null, false);
         assertFalse(future.cancel(true));
     }
 
     @Test
     public void testReturnsResourceOnGetIfAlreadyDone() throws ExecutionException, InterruptedException {
         Object expected = new Object();
-        future.onResourceReady(expected, null);
+        future.onResourceReady(expected, null, false);
 
         assertEquals(expected, future.get());
     }
@@ -153,7 +153,7 @@ public class RequestFutureTargetTest {
     public void testReturnsResourceOnGetWithTimeoutIfAlreadyDone() throws InterruptedException, ExecutionException,
             TimeoutException {
         Object expected = new Object();
-        future.onResourceReady(expected, null);
+        future.onResourceReady(expected, null, false);
 
         assertEquals(expected, future.get(100, TimeUnit.MILLISECONDS));
     }
@@ -264,7 +264,7 @@ public class RequestFutureTargetTest {
 
     @Test
     public void testNotifiesAllWhenResourceReady() {
-        future.onResourceReady(null, null);
+        future.onResourceReady(null, null, false);
         verify(waiter).notifyAll(eq(future));
     }
 
@@ -288,7 +288,7 @@ public class RequestFutureTargetTest {
         doAnswer(new Answer() {
             @Override
             public Object answer(InvocationOnMock invocationOnMock) throws Throwable {
-                future.onResourceReady(expected, null);
+                future.onResourceReady(expected, null, false);
                 return null;
             }
         }).when(waiter).waitForTimeout(eq(future), anyLong());

@@ -43,12 +43,13 @@ public class GlideDrawableImageViewTarget extends ImageViewTarget<GlideDrawable>
      * If no {@link com.bumptech.glide.request.animation.GlideAnimation} is given or if the animation does not set the
      * {@link android.graphics.drawable.Drawable} on the view, the drawable is set using
      * {@link android.widget.ImageView#setImageDrawable(android.graphics.drawable.Drawable)}.
-     *
-     * @param resource {@inheritDoc}
+     *  @param resource {@inheritDoc}
      * @param animation {@inheritDoc}
+     * @param fromMemoryCache
      */
     @Override
-    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+    public void onResourceReady(
+            GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation, boolean fromMemoryCache) {
         if (!resource.isAnimated()) {
             //TODO: Try to generalize this to other sizes/shapes.
             // This is a dirty hack that tries to make loading square thumbnails and then square full images less costly
@@ -63,7 +64,7 @@ public class GlideDrawableImageViewTarget extends ImageViewTarget<GlideDrawable>
                 resource = new SquaringDrawable(resource, view.getWidth());
             }
         }
-        super.onResourceReady(resource, animation);
+        super.onResourceReady(resource, animation, fromMemoryCache);
         this.resource = resource;
         resource.setLoopCount(maxLoopCount);
         resource.start();

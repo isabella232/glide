@@ -49,7 +49,8 @@ public class SimpleTargetTest {
     private SimpleTarget<Object> getTarget() {
         return new SimpleTarget<Object>() {
             @Override
-            public void onResourceReady(Object resource, GlideAnimation<? super Object> glideAnimation) {
+            public void onResourceReady(
+                    Object resource, GlideAnimation<? super Object> glideAnimation, boolean fromMemoryCache) {
                 // Do nothing.
             }
         };
@@ -58,7 +59,8 @@ public class SimpleTargetTest {
     private SimpleTarget<Object> getTarget(int width, int height) {
         return new SimpleTarget<Object>(width, height) {
             @Override
-            public void onResourceReady(Object resource, GlideAnimation<? super Object> glideAnimation) {
+            public void onResourceReady(
+                    Object resource, GlideAnimation<? super Object> glideAnimation, boolean fromMemoryCache) {
                 // Do nothing.
             }
         };

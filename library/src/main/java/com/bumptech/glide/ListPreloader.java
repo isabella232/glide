@@ -304,7 +304,7 @@ public class ListPreloader<T> implements AbsListView.OnScrollListener {
 
         @Override
         public void onResourceReady(Object resource,
-                                    GlideAnimation<? super Object> glideAnimation) {
+                                    GlideAnimation<? super Object> glideAnimation, boolean fromMemoryCache) {
             // Do nothing.
         }
 

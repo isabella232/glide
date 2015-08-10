@@ -67,8 +67,9 @@ public interface Target<R> extends LifecycleListener {
      * The method that will be called when the resource load has finished.
      *
      * @param resource the loaded resource.
+     * @param fromMemoryCache
      */
-    void onResourceReady(R resource, GlideAnimation<? super R> glideAnimation);
+    void onResourceReady(R resource, GlideAnimation<? super R> glideAnimation, boolean fromMemoryCache);
 
     /**
      * A lifecycle callback that is called when a load is cancelled and its resources are freed.

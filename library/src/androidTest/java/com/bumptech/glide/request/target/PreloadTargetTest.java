@@ -31,7 +31,7 @@ public class PreloadTargetTest {
         Request request = mock(Request.class);
         PreloadTarget<Object> target = PreloadTarget.obtain(100, 100);
         target.setRequest(request);
-        target.onResourceReady(new Object(), null);
+        target.onResourceReady(new Object(), null, false);
 
         verify(request).clear();
     }

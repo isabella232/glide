@@ -501,7 +501,7 @@ public class ViewTargetTest {
         }
 
         @Override
-        public void onResourceReady(Object resource, GlideAnimation glideAnimation) {
+        public void onResourceReady(Object resource, GlideAnimation glideAnimation, boolean fromMemoryCache) {
 
         }
 
