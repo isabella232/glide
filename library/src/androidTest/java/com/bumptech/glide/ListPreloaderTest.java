@@ -8,6 +8,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import android.widget.AbsListView;
 import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.bumptech.glide.request.target.Target;
 
@@ -56,6 +57,7 @@ public class ListPreloaderTest {
             }
         };
         ListPreloader<Object> preloader = new ListPreloader<Object>(preloaderAdapter, preloaderAdapter, 10);
+        preloader.onScrollStateChanged(null, AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL);
         preloader.onScroll(null, 1, 10, 30);
         assertEquals(10, calledCount.get());
     }
@@ -91,6 +93,7 @@ public class ListPreloaderTest {
         };
         ListPreloader<Object> preloader = new ListPreloader<Object>(preloaderAdapter, preloaderAdapter,
                 toPreload);
+        preloader.onScrollStateChanged(null, AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL);
         preloader.onScroll(null, 1, 10, 20);
     }
 
@@ -112,6 +115,7 @@ public class ListPreloaderTest {
             }
         };
         ListPreloader<Object> preloader = new ListPreloader<Object>(preloaderAdapter, preloaderAdapter, 10);
+        preloader.onScrollStateChanged(null, AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL);
         preloader.onScroll(null, 30, 10, 40);
         preloader.onScroll(null, 29, 10, 40);
         assertTrue(called.get());
@@ -149,6 +153,7 @@ public class ListPreloaderTest {
             }
         };
         ListPreloader<Object> preloader = new ListPreloader<Object>(preloaderAdapter, preloaderAdapter, toPreload);
+        preloader.onScrollStateChanged(null, AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL);
         preloader.onScroll(null, 30, 10, 10);
         preloader.onScroll(null, 29, 10, 10);
     }
@@ -167,6 +172,7 @@ public class ListPreloaderTest {
             }
         };
         ListPreloader<Object> preloader = new ListPreloader<Object>(preloaderAdapter, preloaderAdapter, 10);
+        preloader.onScrollStateChanged(null, AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL);
         preloader.onScroll(null, 16, 10, 30);
         assertTrue(called.get());
     }
@@ -189,6 +195,7 @@ public class ListPreloaderTest {
         };
 
         ListPreloader<Object> preloader = new ListPreloader<Object>(preloaderAdapter, preloaderAdapter, 10);
+        preloader.onScrollStateChanged(null, AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL);
         preloader.onScroll(null, 7, 10, 30);
         preloader.onScroll(null, 6, 10, 30);
         assertTrue(called.get());
@@ -207,6 +214,7 @@ public class ListPreloaderTest {
         };
 
         ListPreloader<Object> preloader = new ListPreloader<Object>(preloaderAdapter, preloaderAdapter, 10);
+        preloader.onScrollStateChanged(null, AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL);
         preloader.onScroll(null, 1, 10, 30);
         preloader.onScroll(null, 4, 10, 30);
 
@@ -229,6 +237,7 @@ public class ListPreloaderTest {
         };
 
         ListPreloader<Object> preloader = new ListPreloader<Object>(preloaderAdapter, preloaderAdapter, 10);
+        preloader.onScrollStateChanged(null, AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL);
         preloader.onScroll(null, 21, 10, 30);
         preloader.onScroll(null, 20, 10, 30);
         preloader.onScroll(null, 17, 10, 30);
@@ -264,6 +273,7 @@ public class ListPreloaderTest {
         ListPreloader<Object> preloader = new ListPreloader<Object>(preloaderAdapter, preloaderAdapter, 10);
         Iterable<Integer> expected = Arrays.asList(10, 11, 20, 21, 10, 11, 20, 21);
 
+        preloader.onScrollStateChanged(null, AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL);
         preloader.onScroll(null, 1, 10, 1 + 10 + 2);
 
         List<Integer> allValues = getTagetsSizes(request, times(4));
@@ -299,6 +309,7 @@ public class ListPreloaderTest {
         ListPreloader<Object> preloader = new ListPreloader<Object>(preloaderAdapter, preloaderAdapter, 10);
         Iterable<Integer> expected = Arrays.asList(20, 21, 10, 11, 20, 21, 10, 11);
 
+        preloader.onScrollStateChanged(null, AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL);
         preloader.onScroll(null, 3, 2, 3 + 2);
         preloader.onScroll(null, 2, 2, 3 + 2);
 
@@ -339,6 +350,7 @@ public class ListPreloaderTest {
         };
         ListPreloader<Object> preloader = new ListPreloader<Object>(preloaderAdapter, preloaderAdapter, 10);
 
+        preloader.onScrollStateChanged(null, AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL);
         preloader.onScroll(null, 1, 10, 13);
         assertThat(loadedObjects).containsAllIn(objects);
     }

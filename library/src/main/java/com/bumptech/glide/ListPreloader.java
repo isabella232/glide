@@ -35,6 +35,7 @@ public class ListPreloader<T> implements AbsListView.OnScrollListener {
     private int totalItemCount;
 
     private boolean isIncreasing = true;
+    private boolean hasUserScrolled;
 
     /**
      * An implementation of PreloadModelProvider should provide all the models that should be preloaded.
@@ -137,16 +138,25 @@ public class ListPreloader<T> implements AbsListView.OnScrollListener {
         this.preloadDimensionProvider = preloadDimensionProvider;
         this.maxPreload = maxPreload;
         preloadTargetQueue = new PreloadTargetQueue(maxPreload + 1);
+        // initialize lastFirstVisible to -1 so preloading is triggered once user scrolls
+        lastFirstVisible = -1;
     }
 
     @Override
     public void onScrollStateChanged(AbsListView absListView, int scrollState) {
-        // Do nothing.
+        if (!hasUserScrolled && scrollState != SCROLL_STATE_IDLE) {
+            hasUserScrolled = true;
+        }
     }
 
     @Override
     public void onScroll(AbsListView absListView, int firstVisible, int visibleCount,
                          int totalCount) {
+        if (!hasUserScrolled) {
+            // onScroll could be triggered without scrolling during layout or during setOnScrollListener;
+            // check the boolean so we do not trigger preloading before user actually scrolls.
+            return;
+        }
         totalItemCount = totalCount;
         if (firstVisible > lastFirstVisible) {
             preload(firstVisible + visibleCount, true);
