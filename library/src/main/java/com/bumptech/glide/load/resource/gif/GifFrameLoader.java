@@ -160,7 +160,8 @@ class GifFrameLoader {
         }
 
         @Override
-        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation, boolean
+                fromMemoryCache) {
             this.resource = resource;
             Message msg = handler.obtainMessage(FrameLoaderCallback.MSG_DELAY, this);
             handler.sendMessageAtTime(msg, targetTime);

@@ -37,7 +37,7 @@ public class ImageViewTargetFactoryTest {
     public void testReturnsTargetForBitmaps() {
         Bitmap bitmap = Bitmap.createBitmap(50, 50, Bitmap.Config.ARGB_8888);
         Target<Bitmap> target = factory.buildTarget(view, Bitmap.class);
-        target.onResourceReady(bitmap, null);
+        target.onResourceReady(bitmap, null, false);
         assertThat(target).isInstanceOf(BitmapImageViewTarget.class);
     }
 
@@ -45,7 +45,7 @@ public class ImageViewTargetFactoryTest {
     public void testReturnsTargetForGlideDrawables() {
         GlideDrawable glideDrawable = mock(GlideDrawable.class);
         Target<GlideDrawable> target = factory.buildTarget(view, GlideDrawable.class);
-        target.onResourceReady(glideDrawable, null);
+        target.onResourceReady(glideDrawable, null, false);
         assertThat(target).isInstanceOf(GlideDrawableImageViewTarget.class);
     }
 
@@ -53,7 +53,7 @@ public class ImageViewTargetFactoryTest {
     public void testReturnsTargetForGifDrawables() {
         GifDrawable gifDrawable = mock(GifDrawable.class);
         Target target = factory.buildTarget(view, GifDrawable.class);
-        target.onResourceReady(gifDrawable, null);
+        target.onResourceReady(gifDrawable, null, false);
         assertThat(target).isInstanceOf(GlideDrawableImageViewTarget.class);
     }
 
@@ -61,7 +61,7 @@ public class ImageViewTargetFactoryTest {
     public void testReturnsTargetForGlideBitmapDrawables() {
         GlideBitmapDrawable drawable = mock(GlideBitmapDrawable.class);
         Target target = factory.buildTarget(view, GlideBitmapDrawable.class);
-        target.onResourceReady(drawable, null);
+        target.onResourceReady(drawable, null, false);
         assertThat(target).isInstanceOf(GlideDrawableImageViewTarget.class);
     }
 
@@ -71,14 +71,14 @@ public class ImageViewTargetFactoryTest {
                 Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_4444));
 
         Target target = factory.buildTarget(view, BitmapDrawable.class);
-        target.onResourceReady(drawable, null);
+        target.onResourceReady(drawable, null, false);
         assertThat(target).isInstanceOf(DrawableImageViewTarget.class);
     }
 
     @Test
     public void testReturnsTargetForDrawables() {
         Target<Drawable> target = factory.buildTarget(view, Drawable.class);
-        target.onResourceReady(new ColorDrawable(Color.RED), null);
+        target.onResourceReady(new ColorDrawable(Color.RED), null, false);
         assertThat(target).isInstanceOf(DrawableImageViewTarget.class);
     }
 

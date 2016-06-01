@@ -51,13 +51,13 @@ public class NotificationTargetTest {
     @Test
     public void testSetsBitmapOnRemoteViewsWithGivenImageIdOnResourceReady() {
         Bitmap bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
-        target.onResourceReady(bitmap, null /*glideAnimation*/);
+        target.onResourceReady(bitmap, null /*glideAnimation*/, false);
         verify(remoteViews).setImageViewBitmap(eq(viewId), eq(bitmap));
     }
 
     @Test
     public void updatesNotificationManagerWithNotificationIdAndNotificationOnResourceReady() {
-        target.onResourceReady(Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888), null /*glideAnimation*/);
+        target.onResourceReady(Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888), null /*glideAnimation*/, false);
 
         assertEquals(notificationId, shadowManager.updatedNotificationId);
         assertEquals(notification, shadowManager.updatedNotification);

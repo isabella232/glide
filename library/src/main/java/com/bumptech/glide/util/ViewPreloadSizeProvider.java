@@ -80,7 +80,7 @@ public class ViewPreloadSizeProvider<T> implements ListPreloader.PreloadSizeProv
         }
 
         @Override
-        public void onResourceReady(Object resource, GlideAnimation glideAnimation) {
+        public void onResourceReady(Object resource, GlideAnimation glideAnimation, boolean fromMemoryCache) {
             // Do nothing
         }
     }

@@ -77,7 +77,7 @@ public class ImageViewTargetTest {
         GlideAnimation<Drawable> animation = mock(GlideAnimation.class);
         when(animation.animate(any(Drawable.class), eq(target))).thenReturn(false);
         Drawable resource = new ColorDrawable(Color.GRAY);
-        target.onResourceReady(resource, animation);
+        target.onResourceReady(resource, animation, false);
 
         assertEquals(resource, target.resource);
     }
@@ -87,7 +87,7 @@ public class ImageViewTargetTest {
         Drawable resource = new ColorDrawable(Color.RED);
         GlideAnimation<Drawable> animation = mock(GlideAnimation.class);
         when(animation.animate(eq(resource), eq(target))).thenReturn(true);
-        target.onResourceReady(resource, animation);
+        target.onResourceReady(resource, animation, false);
 
         assertNull(target.resource);
     }
@@ -99,7 +99,7 @@ public class ImageViewTargetTest {
 
         GlideAnimation<Drawable> animation = mock(GlideAnimation.class);
 
-        target.onResourceReady(new ColorDrawable(Color.GREEN), animation);
+        target.onResourceReady(new ColorDrawable(Color.GREEN), animation, false);
 
         verify(animation).animate(eq(placeholder), eq(target));
     }

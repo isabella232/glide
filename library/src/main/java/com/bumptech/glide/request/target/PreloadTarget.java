@@ -27,7 +27,7 @@ public final class PreloadTarget<Z> extends SimpleTarget<Z> {
     }
 
     @Override
-    public void onResourceReady(Z resource, GlideAnimation<? super Z> glideAnimation) {
+    public void onResourceReady(Z resource, GlideAnimation<? super Z> glideAnimation, boolean fromMemoryCache) {
         Glide.clear(this);
     }
 }

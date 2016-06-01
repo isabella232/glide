@@ -113,39 +113,39 @@ afterEvaluate { project ->
 
         def androidSdkDirectory = project.android.sdkDirectory
 
-        task androidJavadocs(type: Javadoc, dependsOn: compileReleaseJava) {
-            source = releaseVariants.collect { it.javaCompile.source }
-            classpath = files(releaseVariants.collect { files(it.javaCompile.classpath.files,
-                    project.android.bootClasspath) })
+//        task androidJavadocs(type: Javadoc, dependsOn: compileReleaseJava) {
+//            source = releaseVariants.collect { it.javaCompile.source }
+//            classpath = files(releaseVariants.collect { files(it.javaCompile.classpath.files,
+//                    project.android.bootClasspath) })
+//
+//            options {
+//                links("http://docs.oracle.com/javase/7/docs/api/")
+//                linksOffline("http://d.android.com/reference", "${androidSdkDirectory}/docs/reference")
+//            }
+//
+//            exclude '**/BuildConfig.java'
+//            exclude '**/R.java'
+//        }
 
-            options {
-                links("http://docs.oracle.com/javase/7/docs/api/")
-                linksOffline("http://d.android.com/reference", "${androidSdkDirectory}/docs/reference")
-            }
-
-            exclude '**/BuildConfig.java'
-            exclude '**/R.java'
-        }
-
-        task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-            from androidJavadocs.destinationDir
-            baseName "${JAR_PREFIX}${project.name}${JAR_POSTFIX}"
-        }
-
-        task androidSourcesJar(type: Jar) {
-            from project.android.sourceSets.main.java.source
-            baseName "${JAR_PREFIX}${project.name}${JAR_POSTFIX}"
-        }
+//        task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+//            from androidJavadocs.destinationDir
+//            baseName "${JAR_PREFIX}${project.name}${JAR_POSTFIX}"
+//        }
+//
+//        task androidSourcesJar(type: Jar) {
+//            from project.android.sourceSets.main.java.source
+//            baseName "${JAR_PREFIX}${project.name}${JAR_POSTFIX}"
+//        }
     }
-
-    artifacts {
-        if (project.getPlugins().hasPlugin('android') || project.getPlugins().hasPlugin('android-library')) {
-            archives androidSourcesJar {
-                classifier "sources"
-            }
-            archives androidJavadocsJar {
-                classifier "javadoc"
-            }
-        }
-    }
+//
+//    artifacts {
+//        if (project.getPlugins().hasPlugin('android') || project.getPlugins().hasPlugin('android-library')) {
+//            archives androidSourcesJar {
+//                classifier "sources"
+//            }
+//            archives androidJavadocsJar {
+//                classifier "javadoc"
+//            }
+//        }
+//    }
 }

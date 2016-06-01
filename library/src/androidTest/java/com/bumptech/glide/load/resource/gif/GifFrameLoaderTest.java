@@ -166,7 +166,8 @@ public class GifFrameLoaderTest {
     public void testDelayTargetSendsMessageWithHandlerDelayed() {
         long targetTime = 1234;
         GifFrameLoader.DelayTarget delayTarget = new GifFrameLoader.DelayTarget(handler, 1, targetTime);
-        delayTarget.onResourceReady(Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888), null /*glideAnimation*/);
+        delayTarget.onResourceReady(Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888), null /*glideAnimation*/,
+                false);
         verify(handler).sendMessageAtTime(any(Message.class), eq(targetTime));
     }
 
@@ -174,7 +175,7 @@ public class GifFrameLoaderTest {
     public void testDelayTargetSetsResourceOnResourceReady() {
         GifFrameLoader.DelayTarget delayTarget = new GifFrameLoader.DelayTarget(handler, 1, 1);
         Bitmap expected = Bitmap.createBitmap(100, 200, Bitmap.Config.RGB_565);
-        delayTarget.onResourceReady(expected, null /*glideAnimation*/);
+        delayTarget.onResourceReady(expected, null /*glideAnimation*/, false);
 
         assertEquals(expected, delayTarget.getResource());
     }

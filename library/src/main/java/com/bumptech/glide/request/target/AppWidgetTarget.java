@@ -130,7 +130,8 @@ public class AppWidgetTarget extends SimpleTarget<Bitmap> {
     }
 
     @Override
-    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation, boolean
+            fromMemoryCache) {
         this.remoteViews.setImageViewBitmap(this.viewId, resource);
         this.update();
     }

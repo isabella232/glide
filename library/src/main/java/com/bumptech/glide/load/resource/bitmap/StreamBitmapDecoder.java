@@ -1,5 +1,6 @@
 package com.bumptech.glide.load.resource.bitmap;
 
+import android.content.ComponentCallbacks2;
 import android.content.Context;
 import android.graphics.Bitmap;
 
@@ -36,7 +37,7 @@ public class StreamBitmapDecoder implements ResourceDecoder<InputStream, Bitmap>
     }
 
     public StreamBitmapDecoder(BitmapPool bitmapPool, DecodeFormat decodeFormat) {
-        this(Downsampler.AT_LEAST, bitmapPool, decodeFormat);
+        this(Downsampler.AT_MOST, bitmapPool, decodeFormat);
     }
 
     public StreamBitmapDecoder(Downsampler downsampler, BitmapPool bitmapPool, DecodeFormat decodeFormat) {
@@ -47,7 +48,12 @@ public class StreamBitmapDecoder implements ResourceDecoder<InputStream, Bitmap>
 
     @Override
     public Resource<Bitmap> decode(InputStream source, int width, int height) {
-        Bitmap bitmap = downsampler.decode(source, bitmapPool, width, height, decodeFormat);
+        Bitmap bitmap = null;
+        try {
+            bitmap = downsampler.decode(source, bitmapPool, width, height, decodeFormat);
+        } catch (OutOfMemoryError error) {
+            Glide.get(null).trimMemory(ComponentCallbacks2.TRIM_MEMORY_BACKGROUND);
+        }
         return BitmapResource.obtain(bitmap, bitmapPool);
     }
 

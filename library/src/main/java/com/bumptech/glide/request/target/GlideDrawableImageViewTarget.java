@@ -48,7 +48,8 @@ public class GlideDrawableImageViewTarget extends ImageViewTarget<GlideDrawable>
      * @param animation {@inheritDoc}
      */
     @Override
-    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation,
+            boolean fromMemoryCache) {
         if (!resource.isAnimated()) {
             //TODO: Try to generalize this to other sizes/shapes.
             // This is a dirty hack that tries to make loading square thumbnails and then square full images less costly
@@ -63,7 +64,7 @@ public class GlideDrawableImageViewTarget extends ImageViewTarget<GlideDrawable>
                 resource = new SquaringDrawable(resource, view.getWidth());
             }
         }
-        super.onResourceReady(resource, animation);
+        super.onResourceReady(resource, animation, fromMemoryCache);
         this.resource = resource;
         resource.setLoopCount(maxLoopCount);
         resource.start();

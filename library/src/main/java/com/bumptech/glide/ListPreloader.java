@@ -303,8 +303,8 @@ public class ListPreloader<T> implements AbsListView.OnScrollListener {
         private int photoWidth;
 
         @Override
-        public void onResourceReady(Object resource,
-                                    GlideAnimation<? super Object> glideAnimation) {
+        public void onResourceReady(Object resource, GlideAnimation<? super Object> glideAnimation, boolean
+                fromMemoryCache) {
             // Do nothing.
         }
 
